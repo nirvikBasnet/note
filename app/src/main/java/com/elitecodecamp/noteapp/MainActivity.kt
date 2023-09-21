@@ -41,23 +41,29 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val notes = remember {
-                        mutableStateListOf<Note>()
-                    }
-                    NoteScreen(notes = notes,
-                        onAddNote = {note ->
-                                    notes.add(note)
-                        },
-                        onRemoveNote = {note ->
 
-                            notes.remove(note)
-
-                        })
+                    NotesApp()
 
                 }
             }
         }
     }
+}
+
+@Composable
+fun NotesApp(noteViewModel: NoteViewModel = viewModel()){
+
+    val notesList = noteViewModel.getAllNotes()
+
+    NoteScreen(notes = notesList,
+        onAddNote = {note ->
+            noteViewModel.addNote(note)
+        },
+        onRemoveNote = {note ->
+
+            noteViewModel.removeNote(note)
+
+        })
 }
 
 
