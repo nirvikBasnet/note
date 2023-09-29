@@ -9,5 +9,5 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class NoteDatabase : RoomDatabase() {
-  abstract fun getNoteDao(): NoteDao
+  abstract fun noteDao(): NoteDao
 }
