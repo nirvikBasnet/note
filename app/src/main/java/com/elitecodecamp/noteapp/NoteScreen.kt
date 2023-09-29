@@ -17,9 +17,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,9 +27,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.elitecodecamp.noteapp.data.Note
 import com.elitecodecamp.noteapp.data.NotesDataSource
 import java.time.format.DateTimeFormatter
 
@@ -103,7 +100,7 @@ fun NoteScreen(
             onClick = {
                 if(title.isNotEmpty()&&content.isNotEmpty()){
                     //save/add to the list
-                    onAddNote(Note(title = title, content = content))
+                    onAddNote(Note(title = title, description = content))
                     title = ""
                     content = ""
 
@@ -132,7 +129,7 @@ fun NoteScreen(
 @Composable
 fun NoteRow(
     modifier: Modifier = Modifier,
-    note:Note,
+    note: Note,
     onNoteClicked:(Note) -> Unit
 ){
     Surface(
@@ -153,7 +150,7 @@ fun NoteRow(
             ){
 
             Text(text = note.title, style = MaterialTheme.typography.titleSmall)
-            Text(text = note.content, style = MaterialTheme.typography.bodyMedium)
+            Text(text = note.description, style = MaterialTheme.typography.bodyMedium)
             Text(text = note.entryDate
                 .format(DateTimeFormatter.ofPattern("EEE, d MMM"))
                 , style = MaterialTheme.typography.bodySmall)
